@@ -1,8 +1,7 @@
 <template>
     <div>
-      <!-- v-html permet d'injecter du html à l'interieur -->
-      <span v-html="welcomeMsg" v-hide></span>
       <!-- v-hide est une directive personnalisee -->
+      <span v-hide>{{welcomeMsg}}</span>
       <form v-hide>
         <input name="player" placeholder="Entrez votre nom de joueur" v-border:red/>
         <button type="submit">Envoyer</button>
@@ -15,7 +14,7 @@ export default {
   name: 'Player',
   created: function () {
     this.player = 'Cindy'
-    this.welcomeMsg = this.player ? `Bonjour <span>${this.player} </span>!` : 'Pas de joueur'
+    this.welcomeMsg = this.player ? 'Bonjour ' + this.player + ' !' : 'Pas de joueur'
   },
   directives: {
     border: function (el, binding) {
