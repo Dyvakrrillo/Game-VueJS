@@ -1,17 +1,14 @@
 <template>
     <div class="score">
-        Votre Score : {{ score }}
+        {{ score ? 'VOTRE SCORE : ' + score : 'Appuyez sur entrée pour démarrer' }}
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Score',
+  name: 'score',
   data: function () {
     return { score: 0 }
-  },
-  created: function () {
-    this.score++
   }
 }
 </script>

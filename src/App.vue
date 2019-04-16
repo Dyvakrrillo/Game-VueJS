@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Game/>
-    <Score/>
-    <Player/>
+    <game/>
+    <score/>
+    <player/>
   </div>
 </template>
 
@@ -25,5 +25,7 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  display: block;
+  height: 1000px;
   }
 </style>

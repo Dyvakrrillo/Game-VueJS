@@ -1,21 +1,41 @@
 <template>
     <div>
+      <!-- v-hide est une directive personnalisee -->
       <!-- v-html permet d'injecter du html à l'interieur -->
       <span v-html="welcomeMsg" v-hide></span>
-      <!-- v-hide est une directive personnalisee -->
-      <form v-hide>
+      <!-- prevent detruit le fonctionnement classique de submit et ne va plus recharger la page-->
+      <form v-hide v-on:submit.prevent="setPlayer">
         <input name="player" placeholder="Entrez votre nom de joueur" v-border:red/>
-        <button type="submit">Envoyer</button>
+        <button type="submit">Jouer</button>
       </form>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Player',
-  created: function () {
-    this.player = 'Cindy'
-    this.welcomeMsg = this.player ? `Bonjour <span>${this.player} </span>!` : 'Pas de joueur'
+  name: 'player',
+  data: function () {
+    // pour rendre une variable reactive, il faut la metre en data
+    return {
+      player: '',
+      welcomeMsg: ''
+    }
+  },
+  updated: function () {
+    this.welcomeMsg = `Bonjour <span>${this.player} </span>!`
+  },
+  methods: {
+    setPlayer: function (event) {
+      // console.log(event)
+      let playerName = event.target[0].value
+      // si le nom n'est pas indiqué, je montre une alerte
+      if (!playerName) {
+        alert('Merci de renseigner votre pseudo')
+        return
+      }
+      this.player = playerName
+      // console.log(this.player)
+    }
   },
   directives: {
     border: function (el, binding) {
@@ -23,7 +43,8 @@ export default {
     },
     // directive v-hide
     hide: function (el, binding, vnode) {
-      console.log(vnode)
+      // console.log(binding)
+      // console.log(vnode)
       // Je verifie si c'est un form ou pas
       let isForm = vnode.tag === 'form'
       // Je recupere le player - vide s'il y en a pas
