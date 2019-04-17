@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <game/>
-    <score/>
-    <player/>
+    <game :player="player" v-on:score="updateScore"></game>
+    <player v-on:player="updatePlayer" class="text-center"></player>
+    <score :score="score" :player="player" class="text-center"></score>
   </div>
 </template>
 
@@ -13,10 +13,21 @@ import Player from './components/Player'
 
 export default {
   name: 'App',
+  data: function () {
+    return { score: 0, player: false }
+  },
   components: {
     Game,
     Score,
     Player
+  },
+  methods: {
+    updateScore: function (score) {
+      this.score = score
+    },
+    updatePlayer: function () {
+      this.player = true
+    }
   }
 }
 </script>
@@ -26,6 +37,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   display: block;
-  height: 1000px;
+  height: 500px;
   }
 </style>
